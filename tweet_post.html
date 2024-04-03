@@ -1,0 +1,93 @@
+<html>
+<head>
+
+<title>Basic Twitter</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+  }
+  #tweet-input {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  #char-count {
+    color: lightgrey;
+  }
+  #char-count.negative {
+    color: red;
+    font-weight: bold;
+  }
+  #posts-heading {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  #tweet-list {
+    list-style: none;
+    padding: 0;
+  }
+  .tweet {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    width: 350px; 
+	
+  }
+</style>
+</head>
+<body>
+
+<h2>Basic Twitter</h2>
+
+<textarea id="tweet-input" placeholder="Write your tweet (max 30 characters)"></textarea>
+<div id="char-count">30 characters remaining</div>
+<button id="post-tweet">Post Tweet</button>
+
+<h3 id="posts-heading">POSTS</h3>
+<ul id="tweet-list"></ul>
+
+<script src=https://code.jquery.com/jquery-3.3.1.min.js
+crossorigin="anonymous"></script>
+<script>
+$(document).ready(function(){
+  const maxChars = 30;
+  
+  $('#tweet-input').on('input', function() {
+    let remainingChars = maxChars - $(this).val().length;
+    $('#char-count').text(remainingChars + ' characters remaining');
+    if (remainingChars < 0) {
+      $('#char-count').addClass('negative');
+      $('#post-tweet').prop('disabled', true);
+    } else {
+      $('#char-count').removeClass('negative');
+      $('#post-tweet').prop('disabled', false);
+    }
+  });
+  
+  $('#post-tweet').click(function() {
+    let tweetText = $('#tweet-input').val().trim();
+    if (tweetText !== '' && tweetText.length <= maxChars) {
+      let username = 'User'; // Hardcoded username
+      let listItem = $('<li class="tweet">').text(username + ': ' + tweetText);
+      $('#tweet-list').prepend(listItem);
+      $('#tweet-input').val('');
+      $('#char-count').text(maxChars + ' characters remaining');
+      $('#tweet-input').focus();
+    }
+  });
+  
+  $('#tweet-input').keypress(function(event) {
+    if (event.which === 13) { // Enter key pressed
+      event.preventDefault();
+      $('#post-tweet').click();
+    }
+  });
+});
+</script>
+
+</body>
+</html>
