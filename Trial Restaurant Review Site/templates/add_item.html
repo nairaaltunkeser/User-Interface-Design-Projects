@@ -1,0 +1,163 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="green-bg">
+
+
+    <div id="form-container">
+        <br></br>
+        <h2 class="font">Add New Restaurant</h2>
+        <a id="seeItHereBtn" class="btn-add btn-primary" style="display: none;">See it here</a>
+        <a id="addAnotherBtn" class="white btn-add btn-primary" style="display: none;">Add another</a> 
+
+        <div id="successMessage" class="alert alert-success" style="display: none;"></div>
+
+        <form class="font" id="addItemForm" action="/add" method="POST">
+            <div class="mb-3">
+                <label for="name" class="form-label font">Name of Restaurant</label>
+                <input type="text" class="form-control" id="name" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="cuisine" class="form-label font">Cuisine</label>
+                <input type="text" class="form-control" id="cuisine" name="cuisine" required>
+            </div>
+    
+            <div class="mb-3">
+                <label for="rating" class="form-label font">Rating(1 to 5)</label>
+                <input type="text" class="form-control" id="rating" name="rating" required>
+                <div class="invalid-feedback ">Rating must be a number.</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="location" class="form-label font">Location</label>
+                <input type="text" class="form-control" id="location" name="location" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="phone" class="form-label font">Telephone</label>
+                <input type="text" class="form-control" id="phone" name="phone" required>
+                <div id="phone-error" class="invalid-feedback" style="display: none;"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="price_range" class="form-label font">Price Range($, $$, $$$, $$$$)</label>
+                <input type="text" class="form-control" id="price_range" name="price_range" required>
+                <div class="invalid-feedback ">Price range must consist of dollar signs and dashes (-).</div>
+            </div>
+
+            <div class="mb-3">
+                <label for="chef" class="form-label font">Chef</label>
+                <input type="text" class="form-control" id="chef" name="chef" required>
+                </div>
+
+            <div class="mb-3">
+                <label for="menu" class="form-label font">3 popular dishes</label>
+                <input type="text" class="form-control" id="menu" name="menu" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label font">Image URL</label>
+                <input type="text" class="form-control" id="image" name="image" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="summary" class="form-label font">Summary</label>
+                <textarea class="form-control font" id="summary" name="summary" rows="3" required minlength="180" oninvalid="this.setCustomValidity('Please enter at least 180 characters')" oninput="this.setCustomValidity('')"></textarea>
+                <div class="invalid-feedback">Please enter at least 180 characters.</div>
+            </div>
+
+            <!-- Add other fields here as needed -->
+            <button type="submit" class="btn-add btn-primary font">Submit New Restaurant</button>
+        </form>
+    </div>
+    <div id="errorMessage" class="alert alert-danger" style="display: none;"></div>
+</div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+$(document).ready(function() {
+    $('#addItemForm').submit(function(event) {
+        event.preventDefault(); // Prevent the form from submitting normally
+        
+        // Hide any previous error messages
+        $('.form-error').remove();
+        $('#errorMessage').hide(); // Hide general error message
+        
+        $.ajax({
+            type: 'POST',
+            url: '/add',
+            data: $('#addItemForm').serialize(),
+            success: function(response) {
+                // Clear input fields
+                $('#addItemForm')[0].reset();
+                
+                // Set focus on the first text box
+                $('#name').focus();
+
+                // Show success message
+                $('#successMessage').text(response.message).show();
+                
+                // Show see it here button and set its href attribute
+                $('#seeItHereBtn').attr('href', '/view/' + response.new_id).show();
+                $('#addAnotherBtn').show();
+            },
+            error: function(xhr, status, error) {
+                // Handle errors here
+                var errors = xhr.responseJSON.errors;
+                
+                // Remove existing error messages
+                $('.form-error').remove();
+                
+                // Append error messages next to corresponding form fields
+                if (errors) {
+                    Object.keys(errors).forEach(function(key) {
+                        $('#' + key).after('<div class="form-error">' + errors[key] + '</div>');
+                    });
+                } else if (xhr.responseJSON.error) {
+                    // Display general error message
+                    $('#errorMessage').text(xhr.responseJSON.error).show();
+                } 
+            }
+        });
+    });
+
+    // Click handler for "Add Another" button
+    $('#addAnotherBtn').click(function() {
+        $('#successMessage').hide();
+        $('#seeItHereBtn').hide();
+        $('#addAnotherBtn').hide();
+    });
+
+    $('#rating').on('input', function() {
+        if (isNaN($(this).val())) {
+            $(this).addClass('is-invalid');
+        } else {
+            $(this).removeClass('is-invalid');
+        }
+    });
+    $('#phone').on('input', function() {
+        var phonePattern = /^\+[\d]+$/; // Regular expression to match the phone number pattern
+        if (!phonePattern.test($(this).val())) {
+            $(this).addClass('is-invalid');
+            $('#phone-error').text('Phone number must start with \'+\' followed by numbers only').show();
+        } else {
+            $(this).removeClass('is-invalid');
+            $('#phone-error').hide();
+        }
+    });
+
+    // Check if price range consists of dollar signs and dashes on input change
+    $('#price_range').on('input', function() {
+        var priceRangeRegex = /^[\$\-]+$/; // Regular expression to match dollar signs and dashes only
+        if (!priceRangeRegex.test($(this).val())) {
+            $(this).addClass('is-invalid');
+        } else {
+            $(this).removeClass('is-invalid');
+        }
+    });
+});
+</script>
+{% endblock %}

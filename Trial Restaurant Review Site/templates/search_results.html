@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<div class="container-fluid search-background">
+    <h2>Search results:</h2>
+    <h3>{{ message }}</h3>
+</div>
+
+<div class="container-view">
+    <div class="med-2">{% if results|length == 1 %}1 result{% else %}{{ results|length }} results{% endif %} found</div><br></br>
+
+    {% if results %}
+    <div class="restaurant-list">
+        {% for result in results %}
+        <div class="restaurant-item bold-text">
+            <a href="/view/{{ result.id }}">{% for item in result.menu %}{% if search_text.lower() in item.lower() %}{{ item }}{% if not loop.last %}, {% endif %}{% endif %}{% endfor %} - {{ result.name }} - {% if search_text.lower() in result.chef.lower() %}
+                (Chef: {{ result.chef }})
+            {% endif %}</a>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="bold-text">No results found.</p>
+    {% endif %}
+</div>
+
+
+<script>
+    $(document).ready(function() {
+        var searchInput = document.getElementById('searchInput');
+
+        $('#searchForm').submit(function(event) {
+            event.preventDefault();
+
+            var searchValue = searchInput.value.trim();
+
+            if (!searchValue) {
+                searchInput.value = '';
+                searchInput.focus();
+            } else {
+                $(this).unbind('submit').submit();
+            }
+        });
+    });
+</script>    
+
+{% endblock %}

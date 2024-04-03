@@ -1,0 +1,127 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<div class="green-bg">
+    <div class="row">
+        <div id="edit-container">
+
+            <h2 class="font">Edit Restaurant</h2>
+            <form id="editForm" method="POST" action="/edit/{{ item.id }}">
+                
+                <div class="mb-3">
+                    <label for="name" class="form-label font">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" value="{{ item.name }}">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="cuisine" class="form-label font">Cuisine:</label>
+                    <input type="text" class="form-control" id="cuisine" name="cuisine" value="{{ ', '.join(item.cuisine) }}">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="rating" class="form-label font">Rating:</label>
+                    <input type="text" class="form-control" id="rating" name="rating" value="{{ item.rating }}">
+                    <div id="ratingError" class="error-message red"></div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="price_range" class="form-label font">Price Range:</label>
+                    <input type="text" class="form-control" id="price_range" name="price_range" value="{{ item.price_range }}">
+                    <div id="priceRangeError" class="error-message red"></div>
+                </div>
+                
+                <div class="mb-3">
+                    <label for="menu" class="form-label font">3 popular dishes:</label>
+                    <input type="text" class="form-control" id="menu" name="menu" value="{{ ', '.join(item.menu) }}">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="image" class="form-label font">Image URL:</label>
+                    <input type="text" class="form-control" id="image" name="image" value="{{ item.image }}">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="chef" class="form-label font">Chef:</label>
+                    <input type="text" class="form-control" id="chef" name="chef" value="{{ item.chef }}">
+                </div>
+                
+                <div class="mb-3">
+                    <label for="location" class="form-label font">Location:</label>
+                    <input type="text" class="form-control" id="location" name="location" value="{{ item.location }}">
+                </div>
+
+                <div class="mb-3">
+                    <label for="phone" class="form-label font">Telephone</label>
+                    <input type="text" class="form-control" id="phone" name="phone" value="{{ item.phone }}">
+                    <div id="phone-error" class="error-message red"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="summary" class="form-label font">Summary:</label>
+                    <textarea class="form-control" id="summary" name="summary">{{ item.summary }}</textarea>
+                </div>
+
+                <button type="submit" class="btn-add font font">Submit Changes</button>
+                <button type="button" id="discardChanges" class="btn-add font">Discard Changes</button>
+            </form>
+        </div>
+
+        <div id="edit-img-container" class="d-flex justify-content-center align-items-center">
+            <img src="{{ item.image }}" alt="Current existing image for {{ item.name }}" class="restaurant-image-edit">
+        </div>
+  
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // Validate rating field input
+        $('#rating').on('input', function() {
+            var ratingInput = $(this).val();
+            // Regular expression to match numbers and a decimal point
+            var validCharacters = /^[0-9.]+$/;
+
+            if (!validCharacters.test(ratingInput)) {
+                $('#ratingError').text('Please enter a number in the rating field');
+            } else {
+                $('#ratingError').text('');
+            }
+        });
+        // Validate price range field input
+        $('#price_range').on('input', function() {
+            var priceRangeInput = $(this).val();
+            // Regular expression to match dollar signs or hyphens
+            var validCharacters = /^[\$-]+$/;
+
+            if (!validCharacters.test(priceRangeInput)) {
+                $('#priceRangeError').text('Please enter only dollar signs in the price range field');
+            } else {
+                $('#priceRangeError').text('');
+            }
+        });
+        
+        $('#phone').on('input', function() {
+        var phonePattern = /^\+[\d]+$/; // Regular expression to match the phone number pattern
+        if (!phonePattern.test($(this).val())) {
+            $(this).addClass('is-invalid');
+            $('#phone-error').text('Phone number must start with \'+\' followed by 11 digits').show();
+        } else {
+            $(this).removeClass('is-invalid');
+            $('#phone-error').hide();
+        }
+        });
+        
+
+        // Handle discard changes button click
+        $('#discardChanges').click(function() {
+            // Show confirmation dialog
+            if (confirm("Are you sure you want to discard changes?")) {
+                // If user confirms, redirect to the view page
+                window.location.href = "/view/{{ item.id }}";
+            }
+        });
+    });
+</script>
+
+{% endblock %}

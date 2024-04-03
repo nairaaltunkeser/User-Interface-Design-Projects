@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="green-bg">
+<div class="row">
+<div id="view-container" class="col-md-8">
+
+    <div class="row">
+        <div class="general-container">
+            <br></br>
+                <ul class="no-dots font">
+                    <li><strong class="big-view">{{ item.name }}</strong> </li>
+                    <img src="{{ item.image }}" alt="Photo of {{ item.name }}" class="restaurant-image">
+                    <li class="med">
+                        
+                            {% for cuisine_type in item.cuisine %}
+                                {{ cuisine_type }}{% if not loop.last %}, {% endif %}
+                            {% endfor %}
+                    
+                    </li>
+                    <li class="size"><strong>{{ item.price_range }}</strong></li>
+                    <li class="size">Rating: {{ item.rating }}/5</li>
+                    
+                </ul>
+                <br></br>
+        </div>
+        
+
+        <ul class="no-dots font size">
+            <li class="light-gray">{{ item.summary }}</li>
+            <li class="margin">Head Chef: {{ item.chef }}</li>
+            <li class="margin">Popular dishes:
+                <ul >
+                    {% for menu_item in item.menu %}
+                        <li class="bold-text">{{ menu_item }}</li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <br></br>
+        </ul> 
+    </div> 
+    <form action="/edit/{{ item.id }}" method="GET">
+        <button type="submit" class="btn-edit btn-link yellow">Edit Restaurant Details</button>
+    </form> 
+
+</div> 
+<div class="next-container">
+    <ul class="no-dots font">
+        <li class="white">Location: <strong>{{ item.location }}</strong></li>
+        <li class="white">Telephone: <strong>{{ item.phone }}</strong></li>
+        <br></br>
+        <li class="white">Similar Restaurants:
+            <ul class="restaurant-list no-dots">
+                {% for similar_id in item.similar_restaurants %}
+                    <li><a href="/view/{{ similar_id }}" class="restaurant-link-view">{{ restaurants[similar_id].name }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+</div>
+</div> 
+</div>       
+
+
+{% endblock %}

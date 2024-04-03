@@ -1,0 +1,320 @@
+
+body {
+    background-color: #dfdfdf; /* Set the background color of the body to light grey */
+}
+
+.container-fluid {
+    background-color: #ffffff; /* Set the background color of the main container to white */
+}
+.green-background {
+    background-color: #0d5d61; /* Darker blue color (changed from royal green) */
+    padding: 50px 0; /* Adjust padding as needed */
+    color: #f9f9f9; /* Text color */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: -1; /* Ensure it's behind other elements */
+}
+
+/* Centering the Conceptual Group */
+#conceptualGroup {
+    margin: 0 auto;
+    width: 80%; /* Adjust width as needed */
+}
+
+.restaurant-container {
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+
+.restaurant-box {
+    margin-right: 10px; /* Adjust the spacing between boxes */
+    margin-top: 480px;
+}
+
+.restaurant-link {
+    display: block;
+    padding: 20px;
+    height: 165px;
+    background-color: #ffffff;
+    border-radius: 1px;
+    text-decoration: none;
+    color: #333;
+}
+.restaurant-link:hover{
+    color: #333;
+    text-decoration: none;
+    background-color: #4c8689;
+}
+.row-h{
+    margin-top: 24px;
+    margin-left: -126px;
+}
+.star{
+    margin-left: 28px;
+}
+.yellow{
+    color:rgb(255, 174, 0);
+}
+.lighter-yellow{
+    color:rgb(237, 192, 95);
+}
+.bg-light{
+    color:rgb(237, 192, 95) !important;
+}
+.btn-search:hover{
+    background-color: #0d5d61;
+}
+.btn-search{
+   border-color: #0d5d61;
+}
+.green{
+    color:#0d5d61 !important;
+}
+.green-border{
+    margin-left: 3px;
+    color:#0d5d61;
+    border-color: #0d5d61;
+    height: 38px;
+}
+.white{
+    color:#ffffff !important;
+}
+.small{
+    padding-top: 80px;
+	font-size: 20px;
+}
+.big-view{
+	font-size: 31px;
+}
+.title-med{
+    font-size: 16.9px;
+}
+.med{
+	font-size: 22px;
+}
+.size{
+	font-size: 17px;
+}
+.med-2{
+    font-size: 18px;
+}
+.red{
+    color: #d70000;
+}
+.bold-text {
+    font-weight: bold;
+}
+.bold-gray{
+    color:#464646;
+    font-weight: bold;
+}
+.light-gray{
+    color:#525252;
+}
+.no-dots {
+    list-style-type: none;
+    padding-left: 0;
+}
+.restaurant-image {
+    width: 30%;
+}
+.font{
+    font-family: 'Open Sans', sans-serif !important;
+}
+
+
+/*add_item.html*/
+.green-bg {
+    background-color: #0d5d61;
+    padding-bottom: 20px; /* Green background */
+    padding: 0px 0; /* Adjust padding as needed */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: -1;
+}
+
+#form-container {
+    background-color: #edecec; /* Light gray background */
+    padding: 50px;
+    height: 100%;
+    width: 750px; /* Adjust as needed */
+    margin: auto; /* Centering the form container vertically and horizontally */
+    border-radius: 1px; /* Rounded corners for the form container */
+    border-left: 8px solid rgb(255, 174, 0); /* Yellow border */
+    border-right: 8px solid rgb(255, 174, 0); /* Yellow border */
+}
+.alert.alert-success {
+    margin-top: 10px;
+    border-color: rgb(255, 174, 0);
+    background-color: rgba(255, 174, 0, 0.61) !important; /* Set background color to yellow */
+    color: rgb(255, 255, 255); /* Set text color to black for better visibility */
+}
+
+/* Style for form elements (optional) */
+.form-label {
+    color: rgb(73, 72, 72); /* Dark text color */
+    font-family:'Open Sans', sans-serif;
+}
+
+.form-control {
+    background-color: #fff; /* White background for input fields */
+    color: #333; /* Dark text color */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 2px; /* Rounded corners for input fields */
+   
+}
+.form-control-nav {
+    background-color: #fff; /* White background for input fields */
+    color: #333; /* Dark text color */
+    border: 1px solid #ccc; /* Light gray border */
+    border-radius: 2px; /* Rounded corners for input fields */
+    width: 280px !important; 
+}
+
+.btn-add {
+    background-color: rgb(255, 174, 0); /* Blue button color */
+    color: #fff; /* White text color */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.btn-add:hover {
+    background-color: rgb(204, 140, 0); 
+}
+.margin{
+    margin-top: 10px;
+}
+
+/*VIEW.HTML*/
+
+.restaurant-image {
+    width: 100%; /* Adjust width as needed */
+    max-width: 700px; /* Set a maximum width to maintain aspect ratio */
+    height: 50%; /* Maintain aspect ratio */
+}
+
+.next-container {
+    display: flex;
+    justify-content: right; /* Center horizontally */
+    margin-top: 180px;
+    margin-right: 135px;
+    margin-left: auto;   
+}
+.restaurant-link-view {
+    display: inline-block;
+    padding: 5px 10px; /* Adjust padding to fit the content */
+    margin: 5px; /* Adjust margin for spacing */
+    height: 40px; /* Set a fixed height for individual boxes */
+    line-height: 30px; /* Center the text vertically */
+    background-color: rgb(255, 174, 0);
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    text-decoration: none;
+    color: rgb(94, 65, 2);
+    
+}
+
+.restaurant-link-view:hover {
+    background-color: rgb(204, 140, 0);
+    text-decoration: none;
+    color: rgb(94, 65, 2);
+}
+#view-container {
+    background-color:#e6e6e6; /* Light gray background */
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 30px;
+    height: 100%;
+    width: 1055px; /* Adjust as needed */
+    margin-left: 55px; /* Centering the form container vertically and horizontally */
+    border-radius: 1px; /* Rounded corners for the form container */
+    border-top: 70px solid #0d5d61; 
+    
+}
+.btn-edit {
+    background-color: rgb(255, 174, 0); /* Blue button color */
+    color: #fff; /* White text color */
+    border: none;
+    padding: 5px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.btn-edit:hover{
+    text-decoration: none;
+    background-color: rgb(204, 140, 0);
+    color: rgb(255, 255, 255);
+}
+
+/*EDIT.HTML*/
+
+#edit-container {
+    background-color: #edecec; /* Light gray background */
+    padding: 50px;
+    padding-top: 80px;
+    padding-left: 80px;
+    padding-bottom: 50px;
+    height: 100%;
+    width: 850px; /* Adjust as needed */
+    margin: left; /* Centering the form container vertically and horizontally */
+    border-radius: 1px; /* Rounded corners for the form container */
+    border-right: 8px solid rgb(255, 174, 0); /* Yellow border */
+}
+#editForm label {
+    margin-bottom: 5px; /* Adjust margin between labels */
+}
+
+#editForm input,
+#editForm textarea {
+    margin-bottom: 10px; /* Adjust margin between input fields */
+}
+
+#edit-img-container {
+    flex-grow: 1;
+    text-align: center; /* Center the image horizontally */
+}
+
+.restaurant-image-edit {
+    max-width: 450px; 
+    max-height: 350px; 
+    width: auto; 
+    height: auto;
+}
+
+
+.container-view {
+    margin-top: 180px; /* Add margin to create space between the green background and the result list */
+}
+
+.restaurant-item {
+    border-radius: 3px;
+    border: 1px solid rgb(255, 174, 0);
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgb(255, 174, 0);
+}
+.restaurant-item:hover{
+    background-color:rgb(204, 140, 0);
+}
+.restaurant-item a {
+    color: rgb(71, 71, 71); /* Change the color of the clickable names to white */
+    
+}
+.search-background {
+    background-color: #0d5d61; /* Darker blue color (changed from royal green) */
+    padding: 50px 50px; /* Adjust padding as needed */
+    padding-left: 200px;
+    padding-top: 70px;
+    color: #f9f9f9; /* Text color */
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: -1; /* Ensure it's behind other elements */
+}

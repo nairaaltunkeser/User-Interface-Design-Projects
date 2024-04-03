@@ -1,0 +1,115 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<body>
+
+<div class="container-fluid green-background">
+    <div id="conceptualGroup" class="container mt-4 mb-4">
+        <div class="col-md-3">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/Mehmed-v-tugra.png/800px-Mehmed-v-tugra.png" alt="Ottoman Script Image for Website Icon" class="img-fluid">
+        </div>
+        <div class="row">
+            <div class="col-md-9 font">
+                <h2>Welcome to Sultan's Finds!</h2>
+                <p >
+                    Welcome to our site, where you can discover the best <span class="bold-text title-med font">Turkish restaurants in NYC</span>! 
+                    Whether you're a local looking for new dining experiences or a visitor 
+                    planning your culinary adventure, our platform provides valuable insights 
+                    and recommendations to satisfy your taste buds. Check out our recommendations for a modernt twist to new cuisines!
+                </p>
+            </div>
+            
+        </div>
+        
+    </div>
+    <h2 class="text-center text-white small  font">Popular Restaurants Of The Week:</h2>
+</div>
+
+
+<div class="container">
+    <div class="row" id="restaurantList">
+        <!-- Restaurant items will be dynamically added here -->
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var restaurantList = document.getElementById("restaurantList");
+        var restaurantData = [
+            {"name": "{{ restaurant_3_name }}", "id": "3", "image": "https://www.miamiculinarytours.com/wp-content/uploads/2023/06/unnamed1.webp", "rating": 4.4},
+            {"name": "{{ restaurant_5_name }}", "id": "5", "image": "https://static01.nyt.com/images/2016/01/17/nyregion/17DINELI1/17DINELI1-articleLarge.jpg?quality=75&auto=webp&disable=upscale", "rating": 4.3},
+            {"name": "{{ restaurant_9_name }}", "id": "9", "image": "https://20410430.fs1.hubspotusercontent-na1.net/hub/20410430/hubfs/Imported%20sitepage%20images/slide-image.jpg?width=1440&height=900&name=slide-image.jpg", "rating": 4.6}
+        ];
+
+        restaurantData.forEach(function(restaurant) {
+            var restaurantColumn = document.createElement("div"); // Create a Bootstrap column for each restaurant
+            restaurantColumn.className = "col-md-4 mb-4"; // Bootstrap
+            var restaurantContainer = document.createElement("div"); // Create a container for each restaurant
+            restaurantContainer.className = "restaurant-box text-center bold-gray font"; 
+
+            var restaurantLink = document.createElement("a");
+            restaurantLink.textContent = restaurant.name;
+            restaurantLink.href = "/view/" + restaurant.id; 
+            restaurantLink.className = "restaurant-link"; 
+            
+            var starRow = document.createElement("div"); // Create a new row for the star icons
+            starRow.className = "row star justify-content-center"; // Add classes for styling
+            
+            // Calculate number of full stars
+            var fullStars = Math.floor(restaurant.rating);
+            
+            // Add full stars based on the whole part of the rating
+            for (var i = 0; i < fullStars; i++) {
+                var starIcon = document.createElement("i");
+                starIcon.className = "fas fa-star yellow";
+                starRow.appendChild(starIcon);
+            }
+            
+            // Calculate remainder for the half star
+            var remainder = restaurant.rating - fullStars;
+            
+            // Add half star if remainder is 0.5 or greater
+            if (remainder >= 0.5) {
+                var halfStarIcon = document.createElement("i");
+                halfStarIcon.className = "fas fa-star-half-alt yellow";
+                starRow.appendChild(halfStarIcon);
+            }
+            
+            // Add remaining empty stars to complete 5 stars
+            for (var i = 0; i < 5 - fullStars - (remainder >= 0.5 ? 1 : 0); i++) {
+                var emptyStarIcon = document.createElement("i");
+                emptyStarIcon.className = "far fa-star yellow";
+                starRow.appendChild(emptyStarIcon);
+            }
+            
+            // Add image of the restaurant
+            var restaurantImage = document.createElement("img");
+            restaurantImage.src = restaurant.image;
+            restaurantImage.alt = "Descriptive image for " + restaurant.name;
+            restaurantImage.className = "img-fluid"; // Add class for Bootstrap styling
+            restaurantImage.style.maxWidth = "130px"; // Set maximum width for the image
+            
+            // Create a new row for the image and center it
+            var imageRow = document.createElement("div");
+            imageRow.className = "row-h justify-content-center";
+            var imageColumn = document.createElement("div");
+            imageColumn.className = "col";
+            
+            // Append the image to the column and the column to the row
+            imageColumn.appendChild(restaurantImage);
+            imageRow.appendChild(imageColumn);
+            
+            // Append the image row to the restaurant container
+            restaurantContainer.appendChild(restaurantLink).appendChild(starRow).appendChild(imageRow);
+            
+            restaurantColumn.appendChild(restaurantContainer);
+            restaurantList.appendChild(restaurantColumn);
+        });
+    });
+</script>
+
+
+
+</body>
+{% endblock %}
