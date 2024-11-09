@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block title %}Camera Quiz{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<script src="{{ url_for('static', filename='js/quiz_camera.js') }}"></script>
+<h1 style=" margin-left:25px; margin-top: 7px;">Question 4</h1>
+<div class="container text-center">
+
+    <p style="margin-top: 50px; font-size: 23px;">Drag the ISO, Shutter Speed, and Aperture to the right place on the camera!</p>
+    <div class="camera-setup" style="margin-bottom: 50px;width: 100%;">
+        <img src="{{ url_for('static', filename='images/quiz4_camera.png') }}" alt="Camera" class="img-fluid" style="width:100%; max-width: 600px;">
+        <div class="drop-zone" id="shutterSpeedZone" style="width: 17%; height: 20%; margin-left: 130px;"></div>
+        <div class="drop-zone" id="apertureZone" style="width: 17%; height: 20%; margin-left: 260px;"></div>
+        <div class="drop-zone" id="isoZone" style="width: 17%; height: 20%; margin-left: 285px;"></div>
+    </div>
+    <div class="draggables" style="margin-left: 240px; margin-bottom: 50px;">
+        <div draggable="true" id="shutterSpeed" class="draggable" style="max-width: 100px;">Shutter Speed</div>
+        <div draggable="true" id="aperture" class="draggable" style="max-width: 100px;">Aperture</div>
+        <div draggable="true" id="iso" class="draggable" style="max-width: 100px;">ISO</div>
+    </div>
+    <p id="result" style="color: green; font-size: 20px;"></p> 
+    <button id="submit" class="btn btn-success">Submit</button>
+    <button id="reset" class="btn btn-secondary">Reset</button>
+    <a href="{{ url_for('results') }}" class="btn btn-primary">End Quiz!</a>
+
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block title %}ISO Quiz{% endblock %}
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<script src="{{ url_for('static', filename='js/iso.js') }}"></script>
+<h1 style="margin-left: 25px; margin-top: 7px;">ISO Section Quiz</h1>
+<div class="container">
+    <div class="row">
+        <!-- Image being matched on the left -->
+        <div class="col-md-6" style="margin-left: -25%;">
+            <h1 class="title" style="font-size: 35px;">Match this picture</h1>
+            <img src="{{ url_for('static', filename='images/ISO100.png') }}" id="dynamicImage" >
+        </div>
+
+        <!-- Image to match on the right -->
+        <!-- Image to match on the right -->
+        <div class="col-md-6" style="margin-left: 20%; margin-top: 4px;">
+          <h1 class="title" style="font-size: 35px;">to this picture</h1>
+          <img src="{{ url_for('static', filename='images/' + random_iso_image) }}" id="randomImage">
+      </div>
+
+    </div>
+
+    <div class="slider-container" style="margin-left: -25%;">
+        <p style="margin-top: 30px; font-size: 18px;">ISO Values:</p>
+        <input type="range" min="0" max="4" step="1" class="slider" id="isoRange" style="width: 23%; margin-top: -10%;">
+        <!-- Display the values below the slider -->
+        <div class="slider-values bold">
+            <span>1600-</span>
+            <span>800-</span>
+            <span>400-</span>
+            <span>200-</span>
+            <span>100</span>
+        </div>
+    </div>
+    <button id="submitBtn" class="btn btn-primary" style="margin-top: 10px; margin-left: -25%;">Submit</button>
+    <p id="result" style="margin-top: 5px; margin-left: -25%;"></p>
+    <div class="text-center mt-4">
+        <a href="{{ url_for('shutter_1') }}" class="btn btn-primary">Next Lesson</a>
+    </div>
+</div>
+{% endblock %}

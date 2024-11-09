@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+{% block title %}Shutter Quiz{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<script src="{{ url_for('static', filename='js/shutter.js') }}"></script>
+<h1 style="margin-left: 25px; margin-top: 7px;">Shutter Speed Section Quiz</h1>
+<div class="container">
+    <div id="drop-container" class="row">
+        {% for speed, image in items %}
+        <div class="col-md-4 mb-4">
+            <div class="drop-slot" data-shutter="1-{{ speed }}">
+                <img src="{{ url_for('static', filename='images/' + image) }}" alt="Shutter speed 1/{{ speed }}" class="img-fluid">
+                <div class="drop-box"></div>
+                <button class="btn btn-sm btn-secondary clear-btn" onclick="clearDropZone(this)">Clear</button>
+                <p class="feedback"></p>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="title">Drag the shutter speeds to the correct picture</h2>
+            <div id="drag-container">
+                {% for speed, image in items %}
+                <div class="draggable" draggable="true" id="shutter-{{ speed }}" data-shutter="1-{{ speed }}" >1/{{ speed }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <button id="submitBtn" class="btn btn-primary">Submit</button>
+    <p id="result"></p>
+    <div class="text-center mt-4">
+        <a href="{{ url_for('aperture_1') }}" class="btn btn-primary">Next Lesson</a>
+    </div>
+</div>
+{% endblock %}
