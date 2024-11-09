@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+{% block title %}Aperture Quiz{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<script src="{{ url_for('static', filename='js/aperture.js') }}"></script>
+<h1 style="margin-left: 25px; margin-top: 7px;">Aperture Section Quiz</h1>
+<div class="container">
+    <div class="row">
+        <!-- Image being matched on the left -->
+        <div class="col-md-6" style="margin-left: -8%;">
+            <h1 class="title" style="font-size: 35px;">Match this picture</h1>
+            <img id="apertureImage" src="{{ url_for('static', filename='images/aperture_f16.png') }}">
+        </div>
+
+        <!-- Image to match on the right -->
+        <div class="col-md-6"style="margin-left: 8%;">
+            <h1 class="title" style="font-size: 35px;">to this picture</h1>
+            <img src="{{ url_for('static', filename='images/' + random_aperture_image) }}" id="randomImage">
+        </div>
+    </div>
+
+    <div class="slider-container" style="margin-left: -8%;">
+        <p style="margin-top:23px; font-size: 18px;">Aperture Values:</p>
+        <input type="range" min="0" max="5" step="1" class="slider" id="apertureRange" style="width: 23%; margin-top: -10%;">
+        <!-- Display the values below the slider -->
+        <div class="slider-values bold">
+            <span>f/16</span>
+            <span>f/11</span>
+            <span>f/8</span>
+            <span>f/5.6</span>
+            <span>f/4</span>
+            <span>f/2.8</span>
+        </div>
+    </div>
+    <button id="submitBtn" class="btn btn-primary" style="margin-top: 10px; margin-left: -8%;">Submit</button>
+    <p id="result" style="margin-left: -8%;"></p>
+    <div class="text-center mt-4" style="margin-left: -3%;">
+        <a href="{{ url_for('quiz_iso') }}" class="btn btn-primary"> Final Quiz</a>
+    </div>
+</div>
+{% endblock %}

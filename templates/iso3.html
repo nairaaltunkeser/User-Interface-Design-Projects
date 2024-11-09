@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}ISO Lesson 2{% endblock %}
+
+{% block content %}
+<div class="container" style="font-size: 18px;">
+    <div class="row">
+        <!-- Left column for text content -->
+        <div class="col-lg-6" style="margin-top: 30px;">
+            <h1 style="margin-bottom: 15px;">Common ISO Values:</h1>
+            <p>Every camera has a different range of ISO values that you can use. A common set is as follows:</p>
+            <ul>
+                <li>ISO 100 (low ISO)</li>
+                <li>ISO 200</li>
+                <li>ISO 400</li>
+                <li>ISO 800</li>
+                <li>ISO 1600</li>
+                <li>ISO 3200</li>
+                <li>ISO 6400 (high ISO)</li>
+            </ul>
+            <p>When you double your ISO speed, you are doubling the brightness of the photo. So, a photo at ISO 400 will be twice brighter than ISO 200, which will be twice brighter than ISO 100.</p>
+            <p><strong>Remember, you should always try to stick to the lowest ISO (base ISO) of your camera, which is typically ISO 100 or 200, whenever you can!</strong></p>
+
+
+        </div>
+
+        <!-- Right column for images -->
+        <div class="col-lg-6">
+            <img src="{{ url_for('static', filename='images/ISO3.png') }}" alt="ISO Examples" class="img-fluid">
+        </div>
+        
+    </div>
+    <div class="row mt-2">
+        <div class="col text-center">
+            <a href="{{ url_for('iso1') }}" class="btn btn-secondary">Part 1</a>
+        </div>
+        <div class="col text-center">
+            <a href="{{ url_for('iso2') }}" class="btn btn-secondary">Part 2</a>
+        </div>
+        <div class="col text-center">
+            <a href="{{ url_for('iso_quiz') }}" class="btn btn-primary">Take the quiz</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

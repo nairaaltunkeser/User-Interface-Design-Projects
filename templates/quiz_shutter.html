@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+{% block title %}Shutter Speed Quiz{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<script src="{{ url_for('static', filename='js/quiz_shutter.js') }}"></script>
+<h1 style=" margin-left:25px; margin-top: 7px;">Question 2</h1>
+<div class="container text-center">
+    <p style="font-size: 20px;">You're photographing a session <strong>outdoors</strong> on a <strong>cloudy day</strong>, and you want to ensure a sharp, <strong>moderately lit</strong> picture. Which <strong>shutter speed</strong> setting should you choose?</p>
+    <img id="shutterImage" src="{{ url_for('static', filename='images/quiz2_60.png') }}" style="width:100%; max-width: 600px;">
+    <div>
+      <input type="range" min="0" max="5" step="1" class="slider" id="shutterSlider" style="max-width: 570px;">
+      <div class="slider-labels" style="max-width: 650px; margin-left: 50px;">
+            <span>1/60</span>
+            <span>1/125</span>
+            <span>1/250</span>
+            <span>1/500</span>
+            <span>1/1000</span>
+            <span>1/2000</span>
+        </div>
+    </div>
+    <button id="submit" class="btn btn-success">Submit</button>
+    <a href="{{ url_for('quiz_aperture') }}" class="btn btn-primary">Next Question</a>
+    <p id="result"></p>
+</div>
+{% endblock %}
